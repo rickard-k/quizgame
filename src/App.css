@@ -1,5 +1,13 @@
 body {
+  background: url('https://images.unsplash.com/photo-1504387103978-e4ee71416c38?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=864eaecaf88546a104521ac381504e4b&auto=format&fit=crop&w=1534&q=80') 50% 50% no-repeat;
+  background-size: cover;
+  background-color: black;
   color: white;
+}
+
+p {
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 .dropdownMenu {
@@ -7,8 +15,12 @@ body {
   width: 200px;
 }
 
-button {
+
+
+button, select {
+  min-width: 200px;
   font-size: 1rem;
+  font-weight: bold;
   color: white;
   padding: 9px;
   border: 1px solid white;
@@ -21,20 +33,22 @@ button:hover {
   background-color: white;
 }
 
-.main ol {
+.main ul {
   text-align: center;
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
   padding: 6px;
-  max-width: 40%;
 }
 
-#quizWindow {
+.quizWindow {
   width: 75%;
-  background-color: rgb(0,0,0,0.7);
-  border-radius: 12px;
+  background-color: rgb(0,0,0,0.5);
+  border-radius: 35px;
   opacity: 50%;
+  padding: 20px;
 }
 
 
@@ -44,7 +58,7 @@ li {
 }
 
 .App-header {
-  background-color: rgb(0,0,0,0.7);
+  background-color: rgb(0,0,0,0.5);
   
   padding: 15px;
   display: flex;
@@ -53,15 +67,9 @@ li {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  text-align: left;
+  text-align: center;
 }
 
-body {
-  background: url('https://images.unsplash.com/photo-1521920592574-49e0b121c964?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b10c5d5461211ea4d680a6135589c808&auto=format&fit=crop&w=2550&q=80');
-  /* background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1f8f8a17194030f5bf45f3e14fee725e&auto=format&fit=crop&w=2627&q=80'); */
-  background-size: cover;
-
-}
 
 .main {
   display: flex;
@@ -89,5 +97,25 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+#wrong {
+  color: red;
+}
+
+#correct {
+  color: green;
+}
+
+.menuContainer {
+    display: grid;
+    grid-template-rows: auto;
+}
+
+@media  (min-width: 950px) {
+  .menuContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }

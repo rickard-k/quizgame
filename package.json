@@ -23,6 +23,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "body-parser": "^1.18.3"
+    "body-parser": "^1.18.3",
+    "rc-menu": "^7.4.18"
   }
 }
