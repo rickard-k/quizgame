@@ -12,80 +12,96 @@ class App extends Component {
       category: null,
       difficulty: null,
       qAmount: null,
-      };
+    };
 
     this.selectCategory = this.selectCategory.bind(this);
     this.selectDifficulty = this.selectDifficulty.bind(this);
     this.selectQuestions = this.selectQuestions.bind(this);
   }
 
+  component
   selectCategory(event) {
-    this.setState({category: event.target.value});
+    this.setState({ category: event.target.value });
   }
 
   selectDifficulty(event) {
-    this.setState({difficulty: event.target.value});
+    this.setState({ difficulty: event.target.value });
   }
 
   selectQuestions(event) {
-    this.setState({qAmount: event.target.value});
+    this.setState({ qAmount: event.target.value });
+    console.log(this.state.qAmount)
+  }
+
+  componentDidUpdate() {
+
   }
 
   render() {
 
-    // const generateQuiz = <button></button>
-
-    return (
-      <div className="App">
-
+    const headerNmenu =
+      (
         <header className="App-header">
-          <h1>Welcome to the Random Quiz Generator!</h1>
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-
-          <div className="menuContainer">
-            <div className="menuDiv1">
-              <label>Select category:</label><br></br>
-              <select onChange={this.selectCategory}>
-                <option value="17">Science</option>
-                <option value="18">Computers</option>
-                <option value="11">Movies</option>
-                <option value="12">Music</option>
-              </select>
-            </div>
-
-            <div className="menuDiv2">
-              <label>Select difficulty:</label><br></br>
-              <select onChange={this.selectDifficulty}>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-            </div>
-
-            <div className="menuDiv3">
-              <label>Select number of questions:</label><br></br>
-              <select onChange={this.selectQuestions}>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-              </select>
-            </div>
+        <h1>Welcome to the Random Quiz Generator!</h1>
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <div className="menuContainer">
+          <div className="menuDiv1">
+            <label>Select category:</label><br></br>
+            <select onChange={this.selectCategory}>
+              <option value="17">Science</option>
+              <option value="18">Computers</option>
+              <option value="11">Movies</option>
+              <option value="12">Music</option>
+            </select>
           </div>
 
-          <div id="boo"></div>
-        </header>
+          <div className="menuDiv2">
+            <label>Select difficulty:</label><br></br>
+            <select onChange={this.selectDifficulty}>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
 
-        <div className="main">
-          <p></p>
-          <Quiz 
-            category={this.state.category}
-            difficulty={this.state.difficulty}
-            questionAmount={this.state.qAmount}
-          />
+          <div className="menuDiv3">
+            <label>Select number of questions:</label><br></br>
+            <select onChange={this.selectQuestions}>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </div>
         </div>
 
-      </div>
-    );
+        <div id="boo"></div>
+      </header>
+      )
+
+    if (this.state.category && this.state.difficulty && this.state.qAmount) {
+      return (
+        <div className="App">
+          {headerNmenu}
+
+          <div className="main">
+            <p></p>
+            <Quiz
+              category={this.state.category}
+              difficulty={this.state.difficulty}
+              questionAmount={this.state.qAmount}
+            />
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          {headerNmenu}
+          <div className="main">
+          </div>
+        </div>
+      );
+    }
   }
 }
 

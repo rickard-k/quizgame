@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Quiz extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       currentQuestion: 1,
@@ -22,31 +22,36 @@ class Quiz extends Component {
       questionAmount: this.props.questionAmount,
     });
 
-  //https://opentdb.com/api.php?amount=${this.state.questionAmount}&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`
+    console.log(this.state);
 
-    fetch(`https://opentdb.com/api.php?amount=10&category=17&difficulty=hard&type=multiple`)
+    console.log(`https://opentdb.com/api.php?amount=${this.state.questionAmount}&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`)
+
+    fetch(`https://opentdb.com/api.php?amount=${this.props.questionAmount}&category=${this.props.category}&difficulty=${this.props.difficulty}&type=multiple`)
       .then(res => res.json())
       .then(data => {
         this.setState({ questions: data.results });
-    });
+        return data;
+      })
+      .then(x => console.log(x));
   }
 
+
   playerAnswer = (playerAnswer, correctAnswer) => {
-    if ( (playerAnswer === correctAnswer) && this.state.questions ) {
+    if ((playerAnswer === correctAnswer) && this.state.questions) {
       this.setState({
         currentQuestion: this.state.currentQuestion + 1,
         amountCorrectlyAnswered: this.state.amountCorrectlyAnswered + 1,
       });
       document
         .querySelector('#boo')
-        .innerHTML = 
-          'Your answer to the previous question was <span id="correct">correct!</span>';
+        .innerHTML =
+        'Your answer to the previous question was <span id="correct">correct!</span>';
     } else {
-      this.setState({currentQuestion: this.state.currentQuestion + 1})
+      this.setState({ currentQuestion: this.state.currentQuestion + 1 })
       document
         .querySelector('#boo')
-        .innerHTML = 
-          'Your answer to the previous question was <span id="wrong">wrong</span>.';
+        .innerHTML =
+        'Your answer to the previous question was <span id="wrong">wrong</span>.';
     }
   }
 
@@ -54,19 +59,16 @@ class Quiz extends Component {
     const answers = [null, null, null, null];
     const correctAnswerIndex = Math.floor(Math.random() * 4)
 
-    if ( this.state.difficulty && this.state.currentQuestion <= this.state.questionAmount) {
+    if (this.state.questions && this.state.currentQuestion <= this.state.questionAmount) {
 
-      answers[correctAnswerIndex] = 
-        this
-          .state
-          .questions[this.state.currentQuestion - 1]
-          .correct_answer;
+      answers[correctAnswerIndex] = this.state.questions[this.state.currentQuestion - 1].correct_answer;
+
       let wrongAnswerIndex = 0;
 
-      for(let i = 0; i <= 3; i += 1) {
+      for (let i = 0; i <= 3; i += 1) {
 
-        if(answers[i] === null) { 
-          answers[i] = 
+        if (answers[i] === null) {
+          answers[i] =
             this
               .state
               .questions[this.state.currentQuestion - 1]
@@ -82,55 +84,54 @@ class Quiz extends Component {
     const quiz = (this.state.questions && this.state.currentQuestion <= this.state.questionAmount) ?
       (<div className="quizWindow">
         <h3>Question {this.state.currentQuestion}:</h3>
-        <p dangerouslySetInnerHTML={{__html: this.state.questions[this.state.currentQuestion - 1].question }}>
+        <p dangerouslySetInnerHTML={{ __html: this.state.questions[this.state.currentQuestion - 1].question }}>
         </p>
         <ul>
           <li>
-            <button 
+            <button
               onClick={() => this.playerAnswer(0, correctAnswerIndex)}
-              dangerouslySetInnerHTML={{ __html: `${ answers[0] }` }}>
+              dangerouslySetInnerHTML={{ __html: `${answers[0]}` }}>
             </button>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => this.playerAnswer(1, correctAnswerIndex)}
-              dangerouslySetInnerHTML={{ __html: `${ answers[1] }` }}
-              >
+              dangerouslySetInnerHTML={{ __html: `${answers[1]}` }}
+            >
             </button>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => this.playerAnswer(2, correctAnswerIndex)}
-              dangerouslySetInnerHTML={{ __html: `${ answers[2] }` }}
-              >
+              dangerouslySetInnerHTML={{ __html: `${answers[2]}` }}
+            >
             </button>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => this.playerAnswer(3, correctAnswerIndex)}
-              dangerouslySetInnerHTML={{ __html: `${ answers[3] }` }}
-              >
+              dangerouslySetInnerHTML={{ __html: `${answers[3]}` }}
+            >
             </button>
           </li>
         </ul>
-        
-      </div>) 
-      : 
+
+      </div>)
+      :
       null;
 
-    // if(this.state.currentQuestion > this.state.questionAmount) {
-    //   let finalResult = 
-    //     <div className="quizWindow">
-    //     <h3>
-    //       You answered {this.state.amountCorrectlyAnswered}<span> </span>
-    //       out of {this.state.questionAmount} questions correctly
-    //     </h3>
-    //     </div>;
-    //   return finalResult;
-    // } else {
-    //   console.log(this.state);
-    // }
+    if (this.state.currentQuestion > this.state.questionAmount) {
+      let finalResult =
+        <div className="quizWindow">
+          <h3>
+            You answered {this.state.amountCorrectlyAnswered}<span> </span>
+            out of {this.state.questionAmount} questions correctly
+        </h3>
+        </div>;
+      return finalResult;
+    } else {
       return quiz;
+    }
   }
 }
 
