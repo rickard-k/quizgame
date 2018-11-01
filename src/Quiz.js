@@ -22,17 +22,12 @@ class Quiz extends Component {
       questionAmount: this.props.questionAmount,
     });
 
-    console.log(this.state);
-
-    console.log(`https://opentdb.com/api.php?amount=${this.state.questionAmount}&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`)
-
     fetch(`https://opentdb.com/api.php?amount=${this.props.questionAmount}&category=${this.props.category}&difficulty=${this.props.difficulty}&type=multiple`)
       .then(res => res.json())
       .then(data => {
         this.setState({ questions: data.results });
         return data;
       })
-      .then(x => console.log(x));
   }
 
 
@@ -124,8 +119,9 @@ class Quiz extends Component {
       let finalResult =
         <div className="quizWindow">
           <h3>
-            You answered {this.state.amountCorrectlyAnswered}<span> </span>
-            out of {this.state.questionAmount} questions correctly
+            <p>You answered {this.state.amountCorrectlyAnswered}<span> </span>
+            out of {this.state.questionAmount} questions correctly.</p>
+            <p>Refresh the page to get another quiz.</p>
         </h3>
         </div>;
       return finalResult;

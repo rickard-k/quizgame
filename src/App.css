@@ -10,13 +10,6 @@ p {
   text-align: center;
 }
 
-.dropdownMenu {
-  background-color: red;
-  width: 200px;
-}
-
-
-
 button, select {
   min-width: 200px;
   font-size: 1rem;
@@ -51,15 +44,8 @@ li {
   padding: 20px;
 }
 
-
-.App-logo {
-  animation: App-logo-spin infinite 60s linear;
-  height: 40vmin;
-}
-
 .App-header {
   background-color: rgb(0,0,0,0.5);
-  
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -69,7 +55,6 @@ li {
   color: white;
   text-align: center;
 }
-
 
 .main {
   display: flex;
@@ -111,6 +96,14 @@ li {
 .menuContainer {
     display: grid;
     grid-template-rows: auto;
+}
+
+.menuDiv {
+  padding: 12px;
+}
+
+select {
+  width: 250px;
 }
 
 @media  (min-width: 950px) {
