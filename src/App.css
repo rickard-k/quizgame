@@ -1,6 +1,7 @@
 body {
-  background: url('https://images.unsplash.com/photo-1504387103978-e4ee71416c38?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=864eaecaf88546a104521ac381504e4b&auto=format&fit=crop&w=1534&q=80') 50% 50% no-repeat;
-  background-size: cover;
+  /* background: url('https://images.unsplash.com/photo-1504387103978-e4ee71416c38?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=864eaecaf88546a104521ac381504e4b&auto=format&fit=crop&w=1534&q=80') 50% 50% no-repeat; */
+  background: url('https://images.unsplash.com/photo-1521920592574-49e0b121c964?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b10c5d5461211ea4d680a6135589c808&auto=format&fit=crop&w=2550&q=80') 50% 50% no-repeat;
+  /* background-size: cover; */
   background-color: black;
   color: white;
 }
@@ -15,10 +16,11 @@ button, select {
   font-size: 1rem;
   font-weight: bold;
   color: white;
-  padding: 9px;
+  padding: 10px;
   border: 1px solid white;
   border-radius: 10px;
   background-color: rgb(0,0,0,0.0);
+  outline: none;
 }
 
 button:hover {
@@ -72,19 +74,6 @@ li {
   text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 #wrong {
   color: red;
 }
@@ -93,10 +82,6 @@ li {
   color: green;
 }
 
-.menuContainer {
-    display: grid;
-    grid-template-rows: auto;
-}
 
 .menuDiv {
   padding: 12px;
@@ -104,6 +89,11 @@ li {
 
 select {
   width: 250px;
+}
+
+.menuContainer {
+    display: grid;
+    grid-template-rows: auto;
 }
 
 @media  (min-width: 950px) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Quiz extends Component {
 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,7 @@ class Quiz extends Component {
       difficulty: null,
       questionAmount: 10,
       questions: null,
+      responseCode: null,
     }
   }
 
@@ -25,7 +27,10 @@ class Quiz extends Component {
     fetch(`https://opentdb.com/api.php?amount=${this.props.questionAmount}&category=${this.props.category}&difficulty=${this.props.difficulty}&type=multiple`)
       .then(res => res.json())
       .then(data => {
-        this.setState({ questions: data.results });
+        this.setState({
+          questions: data.results,
+          responseCode: data.response_code,
+        });
         return data;
       })
   }
@@ -54,7 +59,7 @@ class Quiz extends Component {
     const answers = [null, null, null, null];
     const correctAnswerIndex = Math.floor(Math.random() * 4)
 
-    if (this.state.questions && this.state.currentQuestion <= this.state.questionAmount) {
+    if (this.state.responseCode === 0 && this.state.currentQuestion <= this.state.questionAmount) {
 
       answers[correctAnswerIndex] = this.state.questions[this.state.currentQuestion - 1].correct_answer;
 
@@ -76,7 +81,7 @@ class Quiz extends Component {
 
     }
 
-    const quiz = (this.state.questions && this.state.currentQuestion <= this.state.questionAmount) ?
+    const quiz = (this.state.responseCode === 0 && this.state.currentQuestion <= this.state.questionAmount) ?
       (<div className="quizWindow">
         <h3>Question {this.state.currentQuestion}:</h3>
         <p dangerouslySetInnerHTML={{ __html: this.state.questions[this.state.currentQuestion - 1].question }}>
@@ -115,18 +120,26 @@ class Quiz extends Component {
       :
       null;
 
+    const resCode = this.state.responseCode;
+
     if (this.state.currentQuestion > this.state.questionAmount) {
       let finalResult =
         <div className="quizWindow">
           <h3>
             <p>You answered {this.state.amountCorrectlyAnswered}<span> </span>
-            out of {this.state.questionAmount} questions correctly.</p>
+              out of {this.state.questionAmount} questions correctly.</p>
             <p>Refresh the page to get another quiz.</p>
-        </h3>
+          </h3>
         </div>;
       return finalResult;
-    } else {
+    } else if (resCode === 0) {
       return quiz;
+    } else if (resCode === 1) {
+      return <p>Sorry! Not enough questions for what you have chosen.</p>;
+    } else if (resCode === 2 || resCode === 3 || resCode === 4 || resCode === 5) {
+      return <p>ERROR!</p>
+    } else {
+      return null;
     }
   }
 }

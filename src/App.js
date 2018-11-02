@@ -19,7 +19,6 @@ class App extends Component {
     this.selectQuestions = this.selectQuestions.bind(this);
   }
 
-  component
   selectCategory(event) {
     this.setState({ category: event.target.value });
   }
