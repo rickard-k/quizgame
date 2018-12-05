@@ -1,22 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Marcellus+SC');
+
 body {
   /* background: url('https://images.unsplash.com/photo-1504387103978-e4ee71416c38?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=864eaecaf88546a104521ac381504e4b&auto=format&fit=crop&w=1534&q=80') 50% 50% no-repeat; */
   background: url('https://images.unsplash.com/photo-1521920592574-49e0b121c964?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b10c5d5461211ea4d680a6135589c808&auto=format&fit=crop&w=2550&q=80') 50% 50% no-repeat;
   /* background-size: cover; */
   background-color: black;
   color: white;
+  font-family: 'Marcellus SC', 'Serif';
+  font-size: calc(10px + 2vmin);
+
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: center;
 }
 
+optgroup {
+  font-family: 'Marcellus SC', 'Serif';
+}
+
+select {
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+}
+
 button, select {
+  font-family: 'Marcellus SC', 'Serif';
   min-width: 200px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: white;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid white;
   border-radius: 10px;
   background-color: rgb(0,0,0,0.0);
@@ -40,20 +56,19 @@ li {
 
 .quizWindow {
   width: 75%;
-  background-color: rgb(0,0,0,0.5);
+  background-color: rgb(0,0,0,0.75);
   border-radius: 35px;
   opacity: 50%;
   padding: 20px;
 }
 
 .App-header {
-  background-color: rgb(0,0,0,0.5);
+  background-color: rgb(0,0,0,0.75);
   padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
   text-align: center;
 }

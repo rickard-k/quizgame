@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Quiz extends Component {
 
-
   constructor(props) {
     super(props);
     this.state = {
@@ -38,20 +37,27 @@ class Quiz extends Component {
 
   playerAnswer = (playerAnswer, correctAnswer) => {
     if ((playerAnswer === correctAnswer) && this.state.questions) {
-      this.setState({
-        currentQuestion: this.state.currentQuestion + 1,
-        amountCorrectlyAnswered: this.state.amountCorrectlyAnswered + 1,
+      this.setState( prevState => {
+        return {
+          currentQuestion: prevState.currentQuestion + 1,
+          amountCorrectlyAnswered: prevState.amountCorrectlyAnswered + 1,
+        }
       });
       document
         .querySelector('#boo')
         .innerHTML =
         'Your answer to the previous question was <span id="correct">correct!</span>';
     } else {
-      this.setState({ currentQuestion: this.state.currentQuestion + 1 })
+      this.setState( prevState => {
+        return {
+          currentQuestion: this.state.currentQuestion + 1 
+        }
+        });
       document
         .querySelector('#boo')
         .innerHTML =
-        'Your answer to the previous question was <span id="wrong">wrong</span>.';
+        `Your answer to the previous question was <span id="wrong">wrong</span>.<br>
+        The correct answer was ${this.state.questions[this.state.currentQuestion - 1].correct_answer}`;
     }
   }
 
@@ -66,19 +72,15 @@ class Quiz extends Component {
       let wrongAnswerIndex = 0;
 
       for (let i = 0; i <= 3; i += 1) {
-
         if (answers[i] === null) {
           answers[i] =
             this
               .state
               .questions[this.state.currentQuestion - 1]
               .incorrect_answers[wrongAnswerIndex];
-
           wrongAnswerIndex += 1;
         }
-
       }
-
     }
 
     const quiz = (this.state.responseCode === 0 && this.state.currentQuestion <= this.state.questionAmount) ?
@@ -128,7 +130,7 @@ class Quiz extends Component {
           <h3>
             <p>You answered {this.state.amountCorrectlyAnswered}<span> </span>
               out of {this.state.questionAmount} questions correctly.</p>
-            <p>Refresh the page to get another quiz.</p>
+            <p><a href="/"><button>New quiz</button></a></p>
           </h3>
         </div>;
       return finalResult;
